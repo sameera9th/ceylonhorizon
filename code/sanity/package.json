@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build && node scripts/normalize-admin-build.mjs",
-    "deploy": "sanity deploy"
+    "build": "sanity build && sanity manifest extract && node scripts/normalize-admin-build.mjs",
+    "deploy": "sanity deploy",
+    "schema:deploy": "sanity schema deploy"
   },
   "dependencies": {
     "@sanity/vision": "^4.20.0",

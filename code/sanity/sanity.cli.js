@@ -8,4 +8,7 @@ export default defineCliConfig({
   project: {
     basePath: '/admin',
   },
+  deployment: {
+    appId: 'b3j3st9x7dys307d2d3huvdy',
+  },
 })

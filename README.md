@@ -92,14 +92,15 @@ These values identify a public read-only Sanity dataset. Do not add a Sanity wri
 
 ## Sanity CORS
 
-Add these origins in the Sanity project settings without credentials:
+Add these origins in the Sanity project settings:
 
-- `http://localhost:5173`
-- `http://localhost:4173` (combined production-build preview)
-- `https://ceylonhorizon.com`
-- `https://www.ceylonhorizon.com`
+- `http://localhost:3333` with credentials (Studio development server)
+- `http://localhost:4173` with credentials (combined production-build preview)
+- `https://ceylonhorizon.com` with credentials (public site and self-hosted Studio)
+- `http://localhost:5173` without credentials (public website development server)
+- `https://www.ceylonhorizon.com` without credentials (public website alias)
 
-When the self-hosted Studio first opens, register `https://ceylonhorizon.com` as the production Studio origin. For local combined-build testing, use Sanity's **Add development host** option for `http://localhost:4173` if prompted.
+The production Studio registration for `https://ceylonhorizon.com/admin` uses application ID `b3j3st9x7dys307d2d3huvdy`, configured as `deployment.appId` in `code/sanity/sanity.cli.js`. For local combined-build testing, use Sanity's **Add development host** option for `http://localhost:4173` if prompted.
 
 ## Deployment
 

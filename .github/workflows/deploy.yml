@@ -9,10 +9,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: code/web
-
     permissions:
       id-token: write
       contents: read
@@ -26,17 +22,36 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: code/web/package-lock.json
+          cache-dependency-path: |
+            code/web/package-lock.json
+            code/sanity/package-lock.json
 
-      - name: Install dependencies
+      - name: Install web dependencies
         run: npm ci
+        working-directory: code/web
 
-      - name: Build React app
+      - name: Build public website
         run: npm run build
+        working-directory: code/web
         env:
           VITE_SANITY_PROJECT_ID: 5c55dqxe
           VITE_SANITY_DATASET: production
           VITE_SANITY_API_VERSION: 2026-06-13
+
+      - name: Install Sanity Studio dependencies
+        run: npm ci
+        working-directory: code/sanity
+
+      - name: Build Sanity Studio for /admin
+        run: npm run build
+        working-directory: code/sanity
+        env:
+          SANITY_STUDIO_PROJECT_ID: 5c55dqxe
+          SANITY_STUDIO_DATASET: production
+
+      - name: Add Sanity Studio to website build
+        run: npm run copy:sanity
+        working-directory: code/web
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -45,7 +60,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3
-        run: aws s3 sync dist/ s3://ceylonhorizon-site-prod --delete
+        run: aws s3 sync code/web/dist/ s3://ceylonhorizon-site-prod --delete
 
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id E3EDTRT1OVZO8A --paths "/*"

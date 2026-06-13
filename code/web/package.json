@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:combined": "npm run build && npm --prefix ../sanity run build && npm run copy:sanity",
+    "copy:sanity": "node scripts/copy-sanity-build.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

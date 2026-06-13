@@ -1,0 +1,35 @@
+import { defineField, defineType } from 'sanity'
+
+export const homePage = defineType({
+  name: 'homePage',
+  title: 'Home Page',
+  type: 'document',
+  groups: [
+    { name: 'hero', title: 'Hero' }, { name: 'about', title: 'About' },
+    { name: 'experience', title: 'Experience' }, { name: 'gallery', title: 'Gallery' },
+    { name: 'location', title: 'Location' }, { name: 'contact', title: 'Contact' },
+  ],
+  fields: [
+    defineField({ name: 'heroTitle', title: 'Hero title', type: 'string', group: 'hero' }),
+    defineField({ name: 'heroTagline', title: 'Hero tagline', type: 'string', group: 'hero' }),
+    defineField({ name: 'heroDescription', title: 'Hero description', type: 'text', rows: 3, group: 'hero' }),
+    defineField({ name: 'primaryCtaLabel', title: 'Primary button label', type: 'string', group: 'hero' }),
+    defineField({ name: 'primaryCtaLink', title: 'Primary button link', type: 'string', group: 'hero' }),
+    defineField({ name: 'secondaryCtaLabel', title: 'Secondary button label', type: 'string', group: 'hero' }),
+    defineField({ name: 'secondaryCtaLink', title: 'Secondary button link', type: 'string', group: 'hero' }),
+    defineField({ name: 'aboutTitle', title: 'About title', type: 'string', group: 'about' }),
+    defineField({ name: 'aboutBody', title: 'About paragraphs', type: 'array', of: [{ type: 'text', rows: 4 }], group: 'about' }),
+    defineField({ name: 'experienceSectionTitle', title: 'Section title', type: 'string', group: 'experience' }),
+    defineField({ name: 'experienceSectionDescription', title: 'Section description', type: 'text', rows: 2, group: 'experience' }),
+    defineField({ name: 'experienceCards', title: 'Experience cards', type: 'array', of: [{ type: 'reference', to: [{ type: 'experienceCard' }] }], group: 'experience' }),
+    defineField({ name: 'gallerySectionTitle', title: 'Section title', type: 'string', group: 'gallery' }),
+    defineField({ name: 'gallerySectionDescription', title: 'Section description', type: 'text', rows: 2, group: 'gallery' }),
+    defineField({ name: 'galleryImages', title: 'Gallery images', type: 'array', of: [{ type: 'reference', to: [{ type: 'galleryImage' }] }], group: 'gallery' }),
+    defineField({ name: 'locationTitle', title: 'Location title', type: 'string', group: 'location' }),
+    defineField({ name: 'locationBody', title: 'Location description', type: 'text', rows: 4, group: 'location' }),
+    defineField({ name: 'locationPoints', title: 'Nearby experience points', type: 'array', of: [{ type: 'string' }], group: 'location' }),
+    defineField({ name: 'contactTitle', title: 'Contact title', type: 'string', group: 'contact' }),
+    defineField({ name: 'contactBody', title: 'Contact description', type: 'text', rows: 3, group: 'contact' }),
+  ],
+  preview: { prepare: () => ({ title: 'Ceylon Horizon home page' }) },
+})

@@ -1,0 +1,20 @@
+{
+  "name": "ceylon-horizon-sanity",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@sanity/vision": "^4.20.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sanity": "^4.20.0",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {}
+}

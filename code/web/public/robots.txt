@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ceylonhorizon.com/sitemap.xml

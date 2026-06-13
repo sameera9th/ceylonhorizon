@@ -44,20 +44,10 @@ export function useHomePageContent() {
       }
     }
 
-    const refreshWhenVisible = () => {
-      if (document.visibilityState === 'visible') fetchContent()
-    }
-
     fetchContent()
-    const refreshTimer = window.setInterval(fetchContent, 5000)
-    window.addEventListener('focus', fetchContent)
-    document.addEventListener('visibilitychange', refreshWhenVisible)
 
     return () => {
       isCurrent = false
-      window.clearInterval(refreshTimer)
-      window.removeEventListener('focus', fetchContent)
-      document.removeEventListener('visibilitychange', refreshWhenVisible)
     }
   }, [])
 

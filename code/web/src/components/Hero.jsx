@@ -1,7 +1,18 @@
 export default function Hero({ content }) {
   return (
     <section className="hero" id="top">
-      <img className="hero-image" src="/images/ceylon-horizon-hero.jpg" alt="Ceylon Horizon tropical villa at golden hour" />
+      <video
+        className="hero-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/images/ceylon-horizon-hero.jpg"
+        aria-label="Ceylon Horizon tropical villa at golden hour"
+      >
+        <source src="/videos/ceylon-horizon-hero.mp4" type="video/mp4" />
+        <img src="/images/ceylon-horizon-hero.jpg" alt="Ceylon Horizon tropical villa at golden hour" />
+      </video>
       <div className="hero-overlay" />
       <div className="hero-content">
         <p className="eyebrow light">Private villa · Sri Lanka</p>

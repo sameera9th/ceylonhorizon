@@ -18,7 +18,7 @@ export default function Gallery({ content }) {
       <div className="gallery-grid">
         {images.map((item, index) => (
           <button className={`gallery-item item-${index + 1}`} type="button" key={`${item.caption || item.alt}-${index}`} onClick={() => setActiveIndex(index)} aria-label={`View image ${index + 1}: ${item.caption || item.alt || 'Ceylon Horizon'}`}>
-            <GalleryVisual item={item} />
+            <GalleryVisual item={item} priority={index < 2} />
             <span className="gallery-view">View image <i>↗</i></span>
             <span className="gallery-caption"><small>{String(index + 1).padStart(2, '0')}</small>{item.caption || item.alt}</span>
           </button>

@@ -9,11 +9,20 @@ function withDefinedValues(source = {}) {
 
 function mergeCmsContent(home, settings) {
   const cmsContent = withDefinedValues({ ...home, ...settings })
+  const cmsGalleryImages = Array.isArray(home.galleryImages)
+    ? home.galleryImages.filter((item) => item?.imageUrl)
+    : []
+  const localImageUrls = new Set(fallbackContent.galleryImages.map((item) => item.imageUrl))
+
   return {
     ...fallbackContent,
     ...cmsContent,
     primaryCta: { ...fallbackContent.primaryCta, ...withDefinedValues(home.primaryCta) },
     secondaryCta: { ...fallbackContent.secondaryCta, ...withDefinedValues(home.secondaryCta) },
+    galleryImages: [
+      ...fallbackContent.galleryImages,
+      ...cmsGalleryImages.filter((item) => !localImageUrls.has(item.imageUrl)),
+    ],
   }
 }
 

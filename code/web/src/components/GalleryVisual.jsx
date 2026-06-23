@@ -1,6 +1,14 @@
-export default function GalleryVisual({ item, className = '' }) {
+export default function GalleryVisual({ item, className = '', priority = false }) {
   if (item?.imageUrl) {
-    return <img className={className} src={item.imageUrl} alt={item.alt || item.caption || 'Ceylon Horizon gallery'} />
+    return (
+      <img
+        className={className}
+        src={item.imageUrl}
+        alt={item.alt || item.caption || 'Ceylon Horizon gallery'}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    )
   }
 
   return (

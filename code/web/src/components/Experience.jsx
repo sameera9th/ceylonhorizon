@@ -7,6 +7,15 @@ const symbols = [
   <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" />,
 ]
 
+const experienceImages = [
+  '/images/gallery/villa-lobby.jpg',
+  null,
+  '/images/gallery/terrace-dining.jpg',
+  null,
+  null,
+  '/images/gallery/cantilever-villa.jpg',
+]
+
 function ExperienceIcon({ index }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true">{symbols[index % symbols.length]}</svg>
 }
@@ -21,16 +30,22 @@ export default function Experience({ content }) {
         <div className="intro-aside"><span>02</span><p>{content.experienceSectionDescription}</p></div>
       </div>
       <div className="experience-grid">
-        {cards.map((card, index) => (
-          <article className={`experience-card experience-tone-${(index % 3) + 1}`} key={`${card.title}-${index}`}>
-            <div className="experience-card-top">
-              <span className="card-number">{card.icon || String(index + 1).padStart(2, '0')}</span>
-              <span className="experience-icon"><ExperienceIcon index={index} /></span>
-            </div>
-            <div className="experience-card-copy"><h3>{card.title}</h3><p>{card.description}</p></div>
-            <span className="card-arrow" aria-hidden="true">↗</span>
-          </article>
-        ))}
+        {cards.map((card, index) => {
+          const imageUrl = experienceImages[index]
+
+          return (
+            <article className={`experience-card experience-card-${index + 1}${imageUrl ? ' experience-card-image' : ''}`} key={`${card.title}-${index}`}>
+              {imageUrl && <img src={imageUrl} alt="" loading="lazy" decoding="async" />}
+              {imageUrl && <span className="experience-card-shade" aria-hidden="true" />}
+              <div className="experience-card-top">
+                <span className="card-number">{card.icon || String(index + 1).padStart(2, '0')}</span>
+                <span className="experience-icon"><ExperienceIcon index={index} /></span>
+              </div>
+              <div className="experience-card-copy"><h3>{card.title}</h3><p>{card.description}</p></div>
+              <span className="card-arrow" aria-hidden="true">↗</span>
+            </article>
+          )
+        })}
       </div>
     </section>
   )
